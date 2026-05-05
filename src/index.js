@@ -2,11 +2,10 @@
 // https://pixijs.com/8.x/tutorials/getting-started#4
 
 import { Application, Assets, Sprite } from "pixi.js";
+import { Container, Graphics, Text } from "pixi.js";
 import { VERSION } from "pixi.js";
 
-import { Text } from "pixi.js";
-
-import { App } from '@capacitor/app';
+import { App } from "@capacitor/app";
 
 // Asynchronous IIFE(即時実行関数式)
 (async () => {
@@ -16,7 +15,7 @@ import { App } from '@capacitor/app';
 
   // Intialize the application.
   // アプリケーションを初期化する
-  await app.init({ background: "#1099bb", width:500 });
+  await app.init({ background: "#1099bb", width: 500 });
 
   // Then adding the application's canvas to the DOM body.
   // DOMのbodyにアプリケーションのcanvasを追加する
@@ -86,9 +85,35 @@ import { App } from '@capacitor/app';
   //   console.log("testClick()");
   //   alert("testClick!");
   // }
+
+  const button = new Container();
+  button.eventMode = "dynamic"; // v8のイベント有効化設定
+  button.cursor = "pointer";
+
+  const bg = new Graphics();
+  bg.beginFill(0x0000ff).drawRect(0, 0, 100, 50).endFill();
+  button.addChild(bg);
+
+  // ホバー/クリックイベントの追加
+  // button.on("pointertap", () => console.log("Tapped!"));
+  button.on("pointerover", () => (bg.alpha = 0.8));
+  button.on("pointerout", () => (bg.alpha = 1));
+    button.on("pointertap", () => buttonTapped());
+
+    function buttonTapped(){
+      alert("button taped!");
+
+      closeApp();
+    }
+
+    const closeApp = async () => {
+  await App.exitApp();
+};
+
+  app.stage.addChild(button);
 })();
 
-App.addListener('test', ({ canGoBack }) => {
+App.addListener("test", ({ canGoBack }) => {
   alert("app bt click!");
   if (!canGoBack) {
     // 戻る履歴がない（トップページ）場合、アプリを終了する
@@ -99,24 +124,23 @@ App.addListener('test', ({ canGoBack }) => {
   }
 });
 
-App.addListener('appStateChange', ({ isActive }) => {
-  console.log('App state changed. Is active?', isActive);
+App.addListener("appStateChange", ({ isActive }) => {
+  console.log("App state changed. Is active?", isActive);
 });
 
-App.addListener('appUrlOpen', data => {
-  console.log('App opened with URL:', data);
+App.addListener("appUrlOpen", (data) => {
+  console.log("App opened with URL:", data);
 });
 
-App.addListener('appRestoredResult', data => {
-  console.log('Restored state:', data);
+App.addListener("appRestoredResult", (data) => {
+  console.log("Restored state:", data);
 });
 
 const checkAppLaunchUrl = async () => {
   const { url } = await App.getLaunchUrl();
 
-  console.log('App opened with URL: ' + url);
+  console.log("App opened with URL: " + url);
 };
-
 
 const closeApp = async () => {
   await App.exitApp();
