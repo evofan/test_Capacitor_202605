@@ -15,7 +15,7 @@ import { App } from "@capacitor/app";
 
   // Intialize the application.
   // アプリケーションを初期化する
-  await app.init({ background: "#1099bb", width: 500 });
+  await app.init({ background: "#eac016", width: 500 });
 
   // Then adding the application's canvas to the DOM body.
   // DOMのbodyにアプリケーションのcanvasを追加する
@@ -91,24 +91,33 @@ import { App } from "@capacitor/app";
   button.cursor = "pointer";
 
   const bg = new Graphics();
-  bg.beginFill(0x0000ff).drawRect(0, 0, 100, 50).endFill();
+  bg.beginFill(0x0066cc).drawRect(0, 0, 100, 50).endFill();
   button.addChild(bg);
 
   // ホバー/クリックイベントの追加
   // button.on("pointertap", () => console.log("Tapped!"));
   button.on("pointerover", () => (bg.alpha = 0.8));
   button.on("pointerout", () => (bg.alpha = 1));
-    button.on("pointertap", () => buttonTapped());
+
+  /* ★OK!
+  button.on("pointertap", () => buttonTapped());
 
     function buttonTapped(){
       alert("button taped!");
 
       closeApp();
     }
-
-    const closeApp = async () => {
+      */
+  button.on("pointertap", () => buttonTapped2());
+  async function buttonTapped2() {
+          //alert("button taped2!");
+    await App.exitApp();
+  }
+  /*
+  const closeApp = async () => {
   await App.exitApp();
 };
+*/
 
   app.stage.addChild(button);
 })();
