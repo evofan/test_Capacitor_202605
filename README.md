@@ -34,4 +34,16 @@ button.on('pointerover', () => (bg.alpha = 0.8));
 button.on('pointerout', () => (bg.alpha = 1));
 
 app.stage.addChild(button);
+
 ```
+
+<img src="https://evofan.github.io/test_Capacitor_202605/screenshot/2.png" width="50%">  
+
+**Capacitor ビルド＆開発環境（WSL & Android編）**  
+[https://zenn.dev/portalkeyinc/articles/eeb7d2c9227b98](https://zenn.dev/portalkeyinc/articles/eeb7d2c9227b98)  
+> WebViewのデバッグには、Chrome DevToolsが使えます：  
+>1. Androidアプリを起動  
+>2. PCのChromeでchrome://inspect/#devicesを開く  
+>3. 接続されたデバイス一覧にアプリが表示される  
+>4. inspectをクリックでDevToolsが開く  
+これで通常のWeb開発と同じようにコンソールログ、要素検証、ネットワーク監視が可能です。  
