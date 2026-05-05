@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- template html -->
+
+<head>
+  <meta charset="utf-8" />
+  <title>PixiJS test</title>
+
+
+</head>
+
+<body id="list">
+  <h1>PixiJS test 202605_08903</h1>
+  <p><input type="button" value="test" id="test" onclick="test()"></p>
+  <form></form>
+
+    <script>
+    function test(){alert("test!");
+      //App.exitApp();
+      //closeModal();
+
+      closeApp();
+  }
+
+  async function closeApp(){
+    await App.exitApp();
+          alert("closeApp!");
+  }
+    </script>
+    
+</body>
+
+</html>
